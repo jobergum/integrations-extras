@@ -1,0 +1,25 @@
+{
+
+    "status": { "code": "up"},
+    "metrics": {
+        "snapshot": {
+            "from": 1553170249,
+            "to": 1553170309
+        },
+        "values": [
+            {
+                "description": "The relative amount of disk space used on this machine (value in the range [0, 1])",
+                "dimensions": {"disk":"foo"},
+                "name": "content.proton.resource_usage.disk",
+                "values": {
+                    "average": 0.0619282037485391,
+                    "count": 13,
+                    "last": 0.06192820374853909,
+                    "max": 0.06192820374853909,
+                    "min": 0.06192820374853909,
+                    "rate": 0.216666
+                }
+            }
+      ]
+  }
+}

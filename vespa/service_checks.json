@@ -1,0 +1,15 @@
+[
+    {
+        "agent_version": "6.3.0",
+        "check": "vespa.health",
+        "description": "Returns CRITICAL if the check cannot connect",
+        "groups": [],
+        "integration": "vespa",
+        "name": "Vespa Health",
+        "statuses": [
+            "ok",
+            "warning",
+            "critical"
+        ]
+    }
+]

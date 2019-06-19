@@ -1,0 +1,1253 @@
+{
+    "metrics": {
+        "snapshot": {
+            "from": 1.553766067569E9,
+            "to": 1.553766127569E9
+        },
+        "values": [
+            {
+                "dimensions": {"httpMethod": "OPTIONS"},
+                "name": "http.status.1xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "OPTIONS"},
+                "name": "http.status.2xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "OPTIONS"},
+                "name": "http.status.3xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "OPTIONS"},
+                "name": "http.status.4xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "OPTIONS"},
+                "name": "http.status.401",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "OPTIONS"},
+                "name": "http.status.5xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "OPTIONS"},
+                "name": "http.status.403",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "name": "search_connections",
+                "values": {
+                    "average": 4.543762129525361,
+                    "count": 1,
+                    "last": 4.543762129525361,
+                    "max": 4.543762129525361,
+                    "min": 0,
+                    "rate": 0.016666666666666666
+                }
+            },
+            {
+                "name": "jrt.transport.client.unencrypted-connections-established",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "name": "serverThreadPoolSize",
+                "values": {
+                    "average": 500,
+                    "count": 599,
+                    "last": 500,
+                    "max": 500,
+                    "min": 0,
+                    "rate": 9.983333333333333
+                }
+            },
+            {
+                "name": "serverActiveThreads",
+                "values": {
+                    "average": 4.679465776293823,
+                    "count": 599,
+                    "last": 5,
+                    "max": 5,
+                    "min": 0,
+                    "rate": 9.983333333333333
+                }
+            },
+            {
+                "name": "jrt.transport.server.unencrypted-connections-established",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "name": "jdisc.open_file_descriptors",
+                "values": {
+                    "average": 301,
+                    "count": 6,
+                    "last": 301,
+                    "max": 301,
+                    "min": 0,
+                    "rate": 0.1
+                }
+            },
+            {
+                "name": "mem.heap.total",
+                "values": {
+                    "average": 1.610612736E9,
+                    "count": 6,
+                    "last": 1.610612736E9,
+                    "max": 1.610612736E9,
+                    "min": 0,
+                    "rate": 0.1
+                }
+            },
+            {
+                "name": "serverStartedMillis",
+                "values": {
+                    "average": 7.2413148E7,
+                    "count": 30,
+                    "last": 7.2418148E7,
+                    "max": 7.2442148E7,
+                    "min": 0,
+                    "rate": 0.5
+                }
+            },
+            {
+                "name": "chain_indexing_documents",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "name": "jdisc.deactivated_containers.total",
+                "values": {
+                    "average": 0,
+                    "count": 6,
+                    "last": 0,
+                    "max": 0,
+                    "min": 0,
+                    "rate": 0.1
+                }
+            },
+            {
+                "name": "docprocessor_indexing_com_yahoo_docprocs_indexing_IndexingProcessor_indexing_documents",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "name": "jdisc.memory_mappings",
+                "values": {
+                    "average": 1869,
+                    "count": 6,
+                    "last": 1869,
+                    "max": 1869,
+                    "min": 0,
+                    "rate": 0.1
+                }
+            },
+            {
+                "name": "dispatch_fdispatch",
+                "values": {
+                    "count": 41910,
+                    "rate": 698.5
+                }
+            },
+            {
+                "name": "mem.heap.used",
+                "values": {
+                    "average": 9.69166752E8,
+                    "count": 6,
+                    "last": 7.19847872E8,
+                    "max": 1.322523168E9,
+                    "min": 0,
+                    "rate": 0.1
+                }
+            },
+            {
+                "name": "docprocessor_indexing_com_yahoo_docprocs_indexing_IndexingProcessor_indexing_proctime",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "name": "mem.heap.free",
+                "values": {
+                    "average": 6.41445984E8,
+                    "count": 6,
+                    "last": 8.90764864E8,
+                    "max": 1.085070696E9,
+                    "min": 0,
+                    "rate": 0.1
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "PUT"},
+                "name": "http.status.1xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "PUT"},
+                "name": "http.status.2xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "PUT"},
+                "name": "http.status.3xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "PUT"},
+                "name": "http.status.4xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "PUT"},
+                "name": "http.status.5xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "PUT"},
+                "name": "http.status.401",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "PUT"},
+                "name": "http.status.403",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "PATCH"},
+                "name": "http.status.1xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "PATCH"},
+                "name": "http.status.2xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "PATCH"},
+                "name": "http.status.3xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "PATCH"},
+                "name": "http.status.4xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "PATCH"},
+                "name": "http.status.5xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "PATCH"},
+                "name": "http.status.401",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "PATCH"},
+                "name": "http.status.403",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {
+                    "httpMethod": "GET",
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "serverNumRequests",
+                "values": {
+                    "count": 41914,
+                    "rate": 698.5666666666667
+                }
+            },
+            {
+                "dimensions": {
+                    "httpMethod": "GET",
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "serverTimeToFirstByte",
+                "values": {
+                    "average": 6.956267595552799,
+                    "count": 41914,
+                    "last": 2,
+                    "max": 18,
+                    "min": 0,
+                    "rate": 698.5666666666667
+                }
+            },
+            {
+                "dimensions": {
+                    "httpMethod": "GET",
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "serverBytesSent",
+                "values": {
+                    "average": 2108.467815049864,
+                    "count": 41914,
+                    "last": 38384,
+                    "max": 38528,
+                    "min": 0,
+                    "rate": 698.5666666666667
+                }
+            },
+            {
+                "dimensions": {
+                    "httpMethod": "GET",
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "serverNumSuccessfulResponseWrites",
+                "values": {
+                    "count": 41914,
+                    "rate": 698.5666666666667
+                }
+            },
+            {
+                "dimensions": {
+                    "httpMethod": "GET",
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "jdisc.http.request.uri_length",
+                "values": {
+                    "average": 29.998759364412845,
+                    "count": 41914,
+                    "last": 30,
+                    "max": 30,
+                    "min": 0,
+                    "rate": 698.5666666666667
+                }
+            },
+            {
+                "dimensions": {
+                    "httpMethod": "GET",
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "serverTotalSuccessfulResponseLatency",
+                "values": {
+                    "average": 7.015603378346137,
+                    "count": 41914,
+                    "last": 2,
+                    "max": 18,
+                    "min": 0,
+                    "rate": 698.5666666666667
+                }
+            },
+            {
+                "dimensions": {
+                    "httpMethod": "GET",
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "jdisc.http.requests",
+                "values": {
+                    "count": 41914,
+                    "rate": 698.5666666666667
+                }
+            },
+            {
+                "dimensions": {
+                    "httpMethod": "GET",
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "serverNumSuccessfulResponses",
+                "values": {
+                    "count": 41914,
+                    "rate": 698.5666666666667
+                }
+            },
+            {
+                "dimensions": {
+                    "httpMethod": "GET",
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "jdisc.http.request.content_size",
+                "values": {
+                    "average": 0,
+                    "count": 41914,
+                    "last": 0,
+                    "max": 0,
+                    "min": 0,
+                    "rate": 698.5666666666667
+                }
+            },
+            {
+                "dimensions": {"gcName": "G1YoungGeneration"},
+                "name": "jdisc.gc.ms",
+                "values": {
+                    "average": 83.66666666666667,
+                    "count": 6,
+                    "last": 84,
+                    "max": 86,
+                    "min": 0,
+                    "rate": 0.1
+                }
+            },
+            {
+                "dimensions": {"gcName": "G1YoungGeneration"},
+                "name": "jdisc.gc.count",
+                "values": {
+                    "average": 16.833333333333332,
+                    "count": 6,
+                    "last": 17,
+                    "max": 17,
+                    "min": 0,
+                    "rate": 0.1
+                }
+            },
+            {
+                "dimensions": {"chain": "indexing"},
+                "name": "documents_processed",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"gcName": "G1OldGeneration"},
+                "name": "jdisc.gc.ms",
+                "values": {
+                    "average": 0,
+                    "count": 6,
+                    "last": 0,
+                    "max": 0,
+                    "min": 0,
+                    "rate": 0.1
+                }
+            },
+            {
+                "dimensions": {"gcName": "G1OldGeneration"},
+                "name": "jdisc.gc.count",
+                "values": {
+                    "average": 0,
+                    "count": 6,
+                    "last": 0,
+                    "max": 0,
+                    "min": 0,
+                    "rate": 0.1
+                }
+            },
+            {
+                "dimensions": {"handler": "http://*:*/search/*"},
+                "name": "handled.latency",
+                "values": {
+                    "average": 6.880863755666906,
+                    "count": 41910,
+                    "last": 6,
+                    "max": 18,
+                    "min": 0,
+                    "rate": 698.5
+                }
+            },
+            {
+                "dimensions": {"handler": "http://*:*/search/*"},
+                "name": "handled.requests",
+                "values": {
+                    "count": 41910,
+                    "rate": 698.5
+                }
+            },
+            {
+                "dimensions": {
+                    "chain": "vespa",
+                    "rankProfile": "default"
+                },
+                "name": "relevance.at_10",
+                "values": {
+                    "average": 0,
+                    "count": 41911,
+                    "last": 0,
+                    "max": 0,
+                    "min": 0,
+                    "rate": 698.5166666666667
+                }
+            },
+            {
+                "dimensions": {
+                    "chain": "vespa",
+                    "rankProfile": "default"
+                },
+                "name": "relevance.at_1",
+                "values": {
+                    "average": 0,
+                    "count": 41911,
+                    "last": 0,
+                    "max": 0,
+                    "min": 0,
+                    "rate": 698.5166666666667
+                }
+            },
+            {
+                "dimensions": {
+                    "chain": "vespa",
+                    "rankProfile": "default"
+                },
+                "name": "relevance.at_3",
+                "values": {
+                    "average": 0,
+                    "count": 41911,
+                    "last": 0,
+                    "max": 0,
+                    "min": 0,
+                    "rate": 698.5166666666667
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "POST"},
+                "name": "http.status.1xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "POST"},
+                "name": "http.status.2xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "POST"},
+                "name": "http.status.3xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "POST"},
+                "name": "http.status.4xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "POST"},
+                "name": "http.status.5xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "POST"},
+                "name": "http.status.401",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "POST"},
+                "name": "http.status.403",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "HEAD"},
+                "name": "http.status.1xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "HEAD"},
+                "name": "http.status.2xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "HEAD"},
+                "name": "http.status.3xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "HEAD"},
+                "name": "http.status.4xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "HEAD"},
+                "name": "http.status.5xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "HEAD"},
+                "name": "http.status.401",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "HEAD"},
+                "name": "http.status.403",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "serverConnectionDurationMean",
+                "values": {
+                    "average": 337.8560624848594,
+                    "count": 30,
+                    "last": 337.853515457329,
+                    "max": 337.863059694374,
+                    "min": 0,
+                    "rate": 0.5
+                }
+            },
+            {
+                "dimensions": {
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "serverConnectionDurationMax",
+                "values": {
+                    "average": 6994263,
+                    "count": 30,
+                    "last": 6994263,
+                    "max": 6994263,
+                    "min": 0,
+                    "rate": 0.5
+                }
+            },
+            {
+                "dimensions": {
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "serverConnectionsOpenMax",
+                "values": {
+                    "average": 7,
+                    "count": 30,
+                    "last": 7,
+                    "max": 7,
+                    "min": 0,
+                    "rate": 0.5
+                }
+            },
+            {
+                "dimensions": {
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "serverNumConnections",
+                "values": {
+                    "average": 104841.2,
+                    "count": 30,
+                    "last": 104842,
+                    "max": 104843,
+                    "min": 0,
+                    "rate": 0.5
+                }
+            },
+            {
+                "dimensions": {
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "serverNumOpenConnections",
+                "values": {
+                    "average": 5,
+                    "count": 30,
+                    "last": 5,
+                    "max": 5,
+                    "min": 0,
+                    "rate": 0.5
+                }
+            },
+            {
+                "dimensions": {
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "serverConnectionDurationStdDev",
+                "values": {
+                    "average": 48251.31296783586,
+                    "count": 30,
+                    "last": 48251.128871866815,
+                    "max": 48251.81923385821,
+                    "min": 0,
+                    "rate": 0.5
+                }
+            },
+            {
+                "dimensions": {"chain": "music"},
+                "name": "query_container_latency",
+                "values": {
+                    "average": 0.24170842281078503,
+                    "count": 41910,
+                    "last": 0,
+                    "max": 7,
+                    "min": 0,
+                    "rate": 698.5
+                }
+            },
+            {
+                "dimensions": {
+                    "api": "documentV1",
+                    "operation": "PUT",
+                    "status": "OK"
+                },
+                "name": "feed.operations",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {
+                    "api": "documentV1",
+                    "operation": "PUT",
+                    "status": "OK"
+                },
+                "name": "feed.latency",
+                "values": {
+                    "average": 0.004,
+                    "count": 0,
+                    "last": 0.004,
+                    "max": 0.004,
+                    "min": 0.004,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {
+                    "httpMethod": "POST",
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "serverBytesReceived",
+                "values": {
+                    "average": 162,
+                    "count": 0,
+                    "last": 162,
+                    "max": 162,
+                    "min": 162,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {
+                    "httpMethod": "POST",
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "serverNumRequests",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {
+                    "httpMethod": "POST",
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "serverTimeToFirstByte",
+                "values": {
+                    "average": 3,
+                    "count": 0,
+                    "last": 3,
+                    "max": 3,
+                    "min": 3,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {
+                    "httpMethod": "POST",
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "serverBytesSent",
+                "values": {
+                    "average": 78,
+                    "count": 0,
+                    "last": 78,
+                    "max": 78,
+                    "min": 78,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {
+                    "httpMethod": "POST",
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "serverNumSuccessfulResponseWrites",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {
+                    "httpMethod": "POST",
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "jdisc.http.request.uri_length",
+                "values": {
+                    "average": 36,
+                    "count": 0,
+                    "last": 36,
+                    "max": 36,
+                    "min": 36,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {
+                    "httpMethod": "POST",
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "serverTotalSuccessfulResponseLatency",
+                "values": {
+                    "average": 3,
+                    "count": 0,
+                    "last": 3,
+                    "max": 3,
+                    "min": 3,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {
+                    "httpMethod": "POST",
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "jdisc.http.requests",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {
+                    "httpMethod": "POST",
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "jdisc.http.request.content_size",
+                "values": {
+                    "average": 162,
+                    "count": 0,
+                    "last": 162,
+                    "max": 162,
+                    "min": 162,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {
+                    "httpMethod": "POST",
+                    "serverName": "SearchServer",
+                    "serverPort": "8080"
+                },
+                "name": "serverNumSuccessfulResponses",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"chain": "vespa"},
+                "name": "query_latency",
+                "values": {
+                    "95percentile": 10.03125,
+                    "99percentile": 12.03125,
+                    "average": 5.951039106678437,
+                    "count": 41911,
+                    "last": 5,
+                    "max": 17,
+                    "min": 0,
+                    "rate": 698.5166666666667
+                }
+            },
+            {
+                "dimensions": {"chain": "vespa"},
+                "name": "documents_covered",
+                "values": {
+                    "count": 4191100000,
+                    "rate": 6.985166666666667E7
+                }
+            },
+            {
+                "dimensions": {"chain": "vespa"},
+                "name": "documents_total",
+                "values": {
+                    "count": 4191100000,
+                    "rate": 6.985166666666667E7
+                }
+            },
+            {
+                "dimensions": {"chain": "vespa"},
+                "name": "max_query_latency",
+                "values": {
+                    "average": 5.951039106678437,
+                    "count": 41911,
+                    "last": 5,
+                    "max": 17,
+                    "min": 0,
+                    "rate": 698.5166666666667
+                }
+            },
+            {
+                "dimensions": {"chain": "vespa"},
+                "name": "totalhits_per_query",
+                "values": {
+                    "average": 100000,
+                    "count": 41911,
+                    "last": 100000,
+                    "max": 100000,
+                    "min": 0,
+                    "rate": 698.5166666666667
+                }
+            },
+            {
+                "dimensions": {"chain": "vespa"},
+                "name": "hits_per_query",
+                "values": {
+                    "average": 10,
+                    "count": 41911,
+                    "last": 10,
+                    "max": 10,
+                    "min": 0,
+                    "rate": 698.5166666666667
+                }
+            },
+            {
+                "dimensions": {"chain": "vespa"},
+                "name": "peak_qps",
+                "values": {
+                    "average": 698.1407326573993,
+                    "count": 60,
+                    "last": 681,
+                    "max": 755,
+                    "min": 0,
+                    "rate": 1
+                }
+            },
+            {
+                "dimensions": {"chain": "vespa"},
+                "name": "queries",
+                "values": {
+                    "count": 41910,
+                    "rate": 698.5
+                }
+            },
+            {
+                "dimensions": {"chain": "vespa"},
+                "name": "mean_query_latency",
+                "values": {
+                    "average": 5.951039106678437,
+                    "count": 41911,
+                    "last": 5,
+                    "max": 17,
+                    "min": 0,
+                    "rate": 698.5166666666667
+                }
+            },
+            {
+                "dimensions": {"handler": "http://*:*/document/v1/*"},
+                "name": "handled.latency",
+                "values": {
+                    "average": 5,
+                    "count": 0,
+                    "last": 5,
+                    "max": 5,
+                    "min": 5,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"handler": "http://*:*/document/v1/*"},
+                "name": "handled.requests",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "GET"},
+                "name": "http.status.1xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "GET"},
+                "name": "http.status.2xx",
+                "values": {
+                    "count": 41881,
+                    "rate": 698.0166666666667
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "GET"},
+                "name": "http.status.3xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "GET"},
+                "name": "http.status.4xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "GET"},
+                "name": "http.status.401",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "GET"},
+                "name": "http.status.5xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "GET"},
+                "name": "http.status.403",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "OTHER"},
+                "name": "http.status.1xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "OTHER"},
+                "name": "http.status.2xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "OTHER"},
+                "name": "http.status.3xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "OTHER"},
+                "name": "http.status.4xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "OTHER"},
+                "name": "http.status.401",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "OTHER"},
+                "name": "http.status.5xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "OTHER"},
+                "name": "http.status.403",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "DELETE"},
+                "name": "http.status.1xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "DELETE"},
+                "name": "http.status.2xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "DELETE"},
+                "name": "http.status.3xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "DELETE"},
+                "name": "http.status.4xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "DELETE"},
+                "name": "http.status.5xx",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "DELETE"},
+                "name": "http.status.401",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            },
+            {
+                "dimensions": {"httpMethod": "DELETE"},
+                "name": "http.status.403",
+                "values": {
+                    "count": 0,
+                    "rate": 0
+                }
+            }
+        ]
+    },
+    "status": {"code": "up"},
+    "time": 1553766128530
+}

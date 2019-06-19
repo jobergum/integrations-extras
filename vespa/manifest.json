@@ -1,0 +1,21 @@
+{
+  "display_name": "Vespa",
+  "maintainer": "bergum@verizonmedia.com",
+  "manifest_version": "1.1.0",
+  "name": "vespa",
+  "metric_prefix": "vespa.",
+  "metric_to_check": "",
+  "creates_events": false,
+  "short_description": "A dd integration to collect Vespa metrics",
+  "guid": "2c1b36c0-9cf7-418e-ac79-3d5bc8f26542",
+  "support": "contrib",
+  "supported_os": [
+    "linux"
+  ],
+  "public_title": "Datadog-Vespa Integration",
+  "categories": [
+    "search"
+  ],
+  "type": "check",
+  "is_public": true 
+}
