@@ -1,0 +1,8 @@
+init_config:
+
+instances:
+  ## @param consumer - string - optional
+  ## The consumer to collect metrics for, either 'default' or a custom consumer
+  ## from your Vespa application's services.xml.
+  #
+  - consumer : default
