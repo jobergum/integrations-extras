@@ -1,8 +1,0 @@
-init_config:
-
-instances:
-  ## @param url - string - required
-  ## The URL where the Vespa service you want to collect metrics for runs.
-  ## Use vespa-model-inspect services -u to find all possible services 
-  #
-  - url : http://localhost:19112/state/v1/metrics 
