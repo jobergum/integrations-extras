@@ -22,11 +22,14 @@ class VespaCheck(AgentCheck):
             if status == "up":
                 self.service_check(self.VESPA_SERVICE_CHECK, AgentCheck.OK, tags=instance_tags,
                                    message="Service returns up")
-            else:
+            elif status == "down":
                 self.service_check(self.VESPA_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
                                    message="Service reports down")
+            else:
+                self.service_check(self.VESPA_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
+                                   message="Service reports unknown status")
             self._emit_metrics(json, instance_tags)
-            self.log.info('Forwarded %s metrics to hq ' % (self.count))
+            self.log.info('Forwarded %s metrics to hq ' % self.count)
         except Exception as e:
             self.service_check(self.VESPA_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
                                message="Exception {} ".format(e))

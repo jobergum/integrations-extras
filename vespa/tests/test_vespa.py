@@ -27,7 +27,18 @@ def test_service_reports_down(aggregator):
         check._get_state_metrics = MagicMock(return_value=json.load(f))
     check.check({"url": "http://does-not-matter-mocked/state/v1/metrics"})
     aggregator.assert_service_check(check.VESPA_SERVICE_CHECK,
-                                    VespaCheck.WARNING)
+                                    VespaCheck.WARNING,
+                                    message="Service reports down")
+
+
+def test_service_reports_unknown(aggregator):
+    check = VespaCheck("vespa", {}, {})
+    with open(os.path.join(HERE, 'node_unknown.json'), 'r') as f:
+        check._get_state_metrics = MagicMock(return_value=json.load(f))
+    check.check({"url": "http://does-not-matter-mocked/state/v1/metrics"})
+    aggregator.assert_service_check(check.VESPA_SERVICE_CHECK,
+                                    VespaCheck.WARNING,
+                                    message="Service reports unknown status")
 
 
 def test_check_metrics(aggregator):
