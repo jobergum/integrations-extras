@@ -51,3 +51,4 @@ def test_check_metrics(aggregator):
 
     aggregator.assert_metric("content.proton.resource_usage.disk",
                              value=0.216666, tags=['documenttype:ad', 'cluster:search'])
+    assert 42 == check.count
