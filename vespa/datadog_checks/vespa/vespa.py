@@ -1,4 +1,6 @@
 import requests
+import logging
+import sys
 from datadog_checks.base import AgentCheck
 from datadog_checks.errors import CheckException
 from requests.exceptions import Timeout, HTTPError, InvalidURL, ConnectionError
@@ -7,6 +9,8 @@ from .coremetrics import (GAUGE, RATE, COUNTER, PERCENTILE, defined_metrics)
 
 
 class VespaCheck(AgentCheck):
+    logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
+
     VESPA_SERVICE_CHECK = 'vespa.health'
     count = 0
 
@@ -45,6 +49,7 @@ class VespaCheck(AgentCheck):
             if 'dimensions' in metric:
                 dimensions = metric['dimensions']
             if name in metrics_2forward:
+                logging.debug('metric: %s, dimensions: %s', name, dimensions)
                 (forwardname, metric_type) = metrics_2forward.get(name)
                 self._emit_metric(forwardname, values, metric_type,
                                   instance_tags, dimensions)
