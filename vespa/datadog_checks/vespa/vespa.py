@@ -12,14 +12,17 @@ class VespaCheck(AgentCheck):
     logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
     VESPA_SERVICE_CHECK = 'vespa.health'
+    URL = 'http://localhost:19092/metrics/v1/values'
     count = 0
 
     def check(self, instance):
         self.count = 0
+
         instance_tags = instance.get('tags', [])
-        url = instance.get("url")
-        if not url:
-            raise CheckException("Configuration error - no url defined")
+        consumer = instance.get('consumer')
+        if not consumer:
+            raise CheckException("Configuration error - no consumer defined")
+        url = self.URL + '?consumer=' + consumer
         try:
             json = self._get_state_metrics(url, 10.0, instance_tags)
             status = json["status"]["code"]
@@ -76,7 +79,6 @@ class VespaCheck(AgentCheck):
         """
         Send rest request to state api and return the response as JSON
         """
-        response = None
         self.log.info('Sending request to "%s"' % url)
         try:
             response = requests.get(url, timeout=timeout)
