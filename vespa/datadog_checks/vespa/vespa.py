@@ -5,7 +5,7 @@ from datadog_checks.base import AgentCheck
 from datadog_checks.errors import CheckException
 from requests.exceptions import Timeout, HTTPError, InvalidURL, ConnectionError
 from simplejson import JSONDecodeError
-from .coremetrics import (GAUGE, RATE, COUNTER, PERCENTILE, defined_metrics)
+from .coremetrics import (GAUGE, RATE, COUNTER, PERCENTILE)
 
 
 class VespaCheck(AgentCheck):
@@ -39,7 +39,6 @@ class VespaCheck(AgentCheck):
                                message="Exception {} ".format(e))
 
     def _emit_metrics(self, json, instance_tags):
-        metrics_2forward = defined_metrics()
         if 'metrics' not in json:
             return
         for metric in json['metrics']['values']:
@@ -48,11 +47,10 @@ class VespaCheck(AgentCheck):
             dimensions = dict()
             if 'dimensions' in metric:
                 dimensions = metric['dimensions']
-            if name in metrics_2forward:
-                logging.debug('metric: %s, dimensions: %s', name, dimensions)
-                (forwardname, metric_type) = metrics_2forward.get(name)
-                self._emit_metric(forwardname, values, metric_type,
-                                  instance_tags, dimensions)
+            logging.debug('metric: %s, dimensions: %s', name, dimensions)
+            metric_type = RATE
+            self._emit_metric(name, values, metric_type,
+                              instance_tags, dimensions)
 
     def _emit_metric(self, name, values, type, instance_tags, dimensions):
         tags = []

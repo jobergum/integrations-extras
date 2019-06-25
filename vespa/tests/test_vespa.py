@@ -49,5 +49,5 @@ def test_check_metrics(aggregator):
     check.check({"url": "http://dummy:8080/state/v1/metrics"})
     aggregator.assert_service_check(check.VESPA_SERVICE_CHECK, VespaCheck.OK)
 
-    aggregator.assert_metric("vespa.content.proton.resource_usage.disk",
-                             value=0.0619282037485390, tags=['documenttype:ad', 'cluster:search'])
+    aggregator.assert_metric("content.proton.resource_usage.disk",
+                             value=0.216666, tags=['documenttype:ad', 'cluster:search'])
