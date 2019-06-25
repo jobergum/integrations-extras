@@ -72,10 +72,13 @@
             },
             {
                 "description": "The relative amount of disk space used on this machine (value in the range [0, 1])",
-                "dimensions": {},
+                "dimensions": {
+                    "documenttype": "ad",
+                    "cluster": "search"
+                },
                 "name": "content.proton.resource_usage.disk",
                 "values": {
-                    "average": 0.0619282037485391,
+                    "average": 0.0619282037485390,
                     "count": 13,
                     "last": 0.06192820374853909,
                     "max": 0.06192820374853909,
