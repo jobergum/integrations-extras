@@ -5,7 +5,6 @@ from datadog_checks.base import AgentCheck
 from datadog_checks.errors import CheckException
 from requests.exceptions import Timeout, HTTPError, InvalidURL, ConnectionError
 from simplejson import JSONDecodeError
-from .coremetrics import (GAUGE, RATE, COUNTER, PERCENTILE)
 
 
 class VespaCheck(AgentCheck):
@@ -51,29 +50,15 @@ class VespaCheck(AgentCheck):
             if 'dimensions' in metric:
                 dimensions = metric['dimensions']
             logging.debug('metric: %s, dimensions: %s', name, dimensions)
-            metric_type = RATE
-            self._emit_metric(name, values, metric_type,
-                              instance_tags, dimensions)
+            self._emit_metric(name, values, instance_tags, dimensions)
 
-    def _emit_metric(self, name, values, type, instance_tags, dimensions):
+    def _emit_metric(self, name, values, instance_tags, dimensions):
         tags = []
         for k in dimensions.keys():
             tags.append(k + ":" + dimensions[k])
         instance_tags = tags + instance_tags
-        if type == GAUGE:
-            self.count += 1
-            self.gauge(name, values['average'], instance_tags)
-        elif type == RATE:
-            self.gauge(name, values['rate'], instance_tags)
-            self.count += 1
-        elif type == COUNTER:
-            self.count(name, values['count'], instance_tags)
-            self.count += 1
-        elif type == PERCENTILE:
-            for sub in ['95percentile', '99percentile', 'average']:
-                if sub in values:
-                    self.count += 1
-                    self.gauge(name+'.'+sub, values[sub], instance_tags)
+        self.gauge(name, values['rate'], instance_tags)
+        self.count += 1
 
     def _get_state_metrics(self, url, timeout, instance_tags):
         """
