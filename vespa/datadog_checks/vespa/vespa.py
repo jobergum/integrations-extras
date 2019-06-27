@@ -97,8 +97,8 @@ class VespaCheck(AgentCheck):
         elif code == "down":
             self.service_check(self.VESPA_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
                                message="Service {} reports down: {}".format(service_name, description))
-            self.log.warn("Service {} reports down: {}".format(service_name, description))
+            self.log.warning("Service {} reports down: {}".format(service_name, description))
         else:
             self.service_check(self.VESPA_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
                                message="Service {} reports unknown status: {}".format(service_name, description))
-            self.log.warn("Service {} reports unknown status: {}".format(service_name, description))
+            self.log.warning("Service {} reports unknown status: {}".format(service_name, description))
