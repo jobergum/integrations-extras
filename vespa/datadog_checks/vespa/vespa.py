@@ -17,6 +17,7 @@ class VespaCheck(AgentCheck):
 
     def check(self, instance):
         self.metric_count = 0
+        self.services_up = 0
 
         instance_tags = instance.get('tags', [])
         consumer = instance.get('consumer')
