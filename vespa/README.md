@@ -49,13 +49,24 @@ See [metadata.csv][6] for a list of metrics provided by this check.
 
 ### Service Checks
 
-`vespa.health`
+#### `vespa.metrics_health`
 
 The check returns:
 
-* `OK` if the check can connect to the Vespa service and the service reports up 
-* `WARNING` if the check can connect but Vespa status is down.
-* `CRITICAL` if the check cannot connect.
+* `OK` if metrics are collected successfully from the Vespa [Node metrics API][11].
+* `WARNING` if there is a response from the Vespa [Node metrics API][11] but there was an error in processing
+   the response, or if Vespa status seems to be down.
+* `CRITICAL` if there is no response from the Vespa [Node metrics API][11].
+
+#### `vespa.process_health`
+
+The check returns:
+
+* `OK` if the Vespa process is up
+* `WARNING` if process status is unknown, e.g. if the Vespa [Node metrics API][11] can connect to the
+   process, but gets an error in the response.
+* `CRITICAL` if the process seems to be down (the Vespa [Node metrics API][11] fails to connect to
+   the service).
 
 ### Events
 
@@ -75,3 +86,4 @@ Need help? Contact [Datadog support][5].
 [8]: https://app.datadoghq.com/account/settings#agent
 [9]: https://docs.vespa.ai/documentation/reference/services-admin.html#metrics
 [10]: datadog_checks/vespa/data/conf.yaml.example
+[11]: https://docs.vespa.ai/documentation/reference/metrics.html#node-metrics-api

@@ -10,7 +10,8 @@ from simplejson import JSONDecodeError
 class VespaCheck(AgentCheck):
     logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
-    VESPA_SERVICE_CHECK = 'vespa.health'
+    VESPA_METRICS_SERVICE_CHECK = 'vespa.metrics-health'
+    VESPA_PROCESS_SERVICE_CHECK = 'vespa.process-health'
     URL = 'http://localhost:19092/metrics/v1/values'
     metric_count = 0
     services_up = 0
@@ -32,8 +33,10 @@ class VespaCheck(AgentCheck):
                 for metrics in service['metrics']:
                     self._emit_metrics(service_name, metrics, instance_tags)
             self.log.info("Forwarded {} metrics to hq for {} services".format(self.metric_count, self.services_up))
+            self.service_check(self.VESPA_METRICS_SERVICE_CHECK, AgentCheck.OK, tags=instance_tags,
+                               message="Metrics collected successfully for consumer {}".format(consumer))
         except Exception as e:
-            self.service_check(self.VESPA_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
+            self.service_check(self.VESPA_METRICS_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
                                message="Exception {} ".format(e))
 
     def _emit_metrics(self, service_name, metrics_elem, instance_tags):
@@ -62,22 +65,22 @@ class VespaCheck(AgentCheck):
             response.raise_for_status()
             response = response.json()
             if 'services' not in response:
-                self.service_check(self.VESPA_SERVICE_CHECK, AgentCheck.CRITICAL, tags=instance_tags,
+                self.service_check(self.VESPA_METRICS_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
                                    message="No services in response from metrics proxy on {}".format(url))
                 raise
 
         except Timeout as e:
-            self.service_check(self.VESPA_SERVICE_CHECK, AgentCheck.CRITICAL, tags=instance_tags,
+            self.service_check(self.VESPA_METRICS_SERVICE_CHECK, AgentCheck.CRITICAL, tags=instance_tags,
                                message="Request timeout: {}, {}".format(url, e))
             raise
 
         except (HTTPError, InvalidURL, ConnectionError) as e:
-            self.service_check(self.VESPA_SERVICE_CHECK, AgentCheck.CRITICAL, tags=instance_tags,
+            self.service_check(self.VESPA_METRICS_SERVICE_CHECK, AgentCheck.CRITICAL, tags=instance_tags,
                                message="Request failed: {0}, {1}".format(url, e))
             raise
 
         except JSONDecodeError as e:
-            self.service_check(self.VESPA_SERVICE_CHECK, AgentCheck.CRITICAL, tags=instance_tags,
+            self.service_check(self.VESPA_METRICS_SERVICE_CHECK, AgentCheck.CRITICAL, tags=instance_tags,
                                message='JSON Parse failed: {0}, {1}'.format(url, e))
             raise
 
@@ -103,14 +106,14 @@ class VespaCheck(AgentCheck):
             tags = self._get_tags(service['metrics'][0])
         instance_tags = tags + instance_tags
         if code == "up":
-            self.service_check(self.VESPA_SERVICE_CHECK, AgentCheck.OK, tags=instance_tags,
+            self.service_check(self.VESPA_PROCESS_SERVICE_CHECK, AgentCheck.OK, tags=instance_tags,
                                message="Service {} returns up".format(service_name))
             self.services_up += 1
         elif code == "down":
-            self.service_check(self.VESPA_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
+            self.service_check(self.VESPA_PROCESS_SERVICE_CHECK, AgentCheck.CRITICAL, tags=instance_tags,
                                message="Service {} reports down: {}".format(service_name, description))
             self.log.warning("Service {} reports down: {}".format(service_name, description))
         else:
-            self.service_check(self.VESPA_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
+            self.service_check(self.VESPA_PROCESS_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
                                message="Service {} reports unknown status: {}".format(service_name, description))
             self.log.warning("Service {} reports unknown status: {}".format(service_name, description))
