@@ -36,26 +36,21 @@ class VespaCheck(AgentCheck):
             self.service_check(self.VESPA_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
                                message="Exception {} ".format(e))
 
-    def _emit_metrics(self, service_name, json, instance_tags):
-        """ Emit one metrics packet, which consists of a set of metrics that share the same set of dimensions.
-        :param json: A json object with 'values' and 'dimensions'
+    def _emit_metrics(self, service_name, metrics_elem, instance_tags):
         """
-        if 'values' not in json:
+        Emit one metrics packet, which consists of a set of metrics that share the same set of dimensions.
+        :param metrics_elem: A (values, dimensions) tuple from the 'metrics' json array.
+        """
+        if 'values' not in metrics_elem:
             return
-        dimensions = dict()
-        if 'dimensions' in json:
-            dimensions = json['dimensions']
-        for name, value in json['values'].items():
+        metric_tags = self._get_tags(metrics_elem)
+        for name, value in metrics_elem['values'].items():
             full_name = service_name + '.' + name
-            self._emit_metric(full_name, value, instance_tags, dimensions)
+            self._emit_metric(full_name, value, metric_tags + instance_tags)
 
-    def _emit_metric(self, name, value, instance_tags, dimensions):
-        tags = []
-        for dim, dim_val in dimensions.items():
-            tags.append(dim + ":" + dim_val)
-        instance_tags = tags + instance_tags
-        logging.debug("metric: {}, dimensions: {}".format(name, instance_tags))
-        self.gauge(name, value, instance_tags)
+    def _emit_metric(self, name, value, tags):
+        logging.debug("metric: {}, dimensions: {}".format(name, tags))
+        self.gauge(name, value, tags)
         self.metric_count += 1
 
     def _get_metrics_json(self, url, timeout, instance_tags):
@@ -88,9 +83,25 @@ class VespaCheck(AgentCheck):
 
         return response
 
+    def _get_tags(self, metrics_elem):
+        """
+        Returns the tags from the dimensions in the given metrics element, or an empty array if there are no dimensions.
+        :param metrics_elem: A (values, dimensions) tuple from the 'metrics' json array.
+        """
+        tags = []
+        if 'dimensions' in metrics_elem:
+            dimensions = metrics_elem['dimensions']
+            for dim, dim_val in dimensions.items():
+                tags.append(dim + ":" + dim_val)
+        return tags
+
     def _report_service_status(self, instance_tags, service_name, service):
         code = service["status"]["code"]
         description = service["status"]["description"]
+        tags = []
+        if 'metrics' in service:
+            tags = self._get_tags(service['metrics'][0])
+        instance_tags = tags + instance_tags
         if code == "up":
             self.service_check(self.VESPA_SERVICE_CHECK, AgentCheck.OK, tags=instance_tags,
                                message="Service {} returns up".format(service_name))

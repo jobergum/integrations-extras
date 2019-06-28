@@ -29,8 +29,9 @@ def test_service_reports_down(aggregator):
     check.check({'consumer': 'default'})
     aggregator.assert_service_check(check.VESPA_SERVICE_CHECK,
                                     VespaCheck.WARNING,
+                                    count=1,
                                     message='Service vespa.down-service reports down: No response',
-                                    count=1)
+                                    tags=['instance:down-service', 'vespaVersion:7.0.0'])
     aggregator.assert_service_check(check.VESPA_SERVICE_CHECK, VespaCheck.OK, count=0)
 
 
@@ -41,8 +42,9 @@ def test_service_reports_unknown(aggregator):
     check.check({'consumer': 'default'})
     aggregator.assert_service_check(check.VESPA_SERVICE_CHECK,
                                     VespaCheck.WARNING,
+                                    count=1,
                                     message='Service vespa.unknown-service reports unknown status: Empty status page',
-                                    count=1)
+                                    tags=['instance:unknown-service', 'vespaVersion:7.0.0'])
     aggregator.assert_service_check(check.VESPA_SERVICE_CHECK, VespaCheck.OK, count=0)
 
 
@@ -53,12 +55,14 @@ def test_down_service_does_not_raise(aggregator):
     check.check({'consumer': 'default'})
     aggregator.assert_service_check(check.VESPA_SERVICE_CHECK,
                                     VespaCheck.WARNING,
+                                    count=1,
                                     message='Service vespa.down-service reports down: No response',
-                                    count=1)
+                                    tags=['instance:down-service', 'vespaVersion:7.0.0'])
     aggregator.assert_service_check(check.VESPA_SERVICE_CHECK,
                                     VespaCheck.OK,
+                                    count=1,
                                     message='Service vespa.up-service returns up',
-                                    count=1)
+                                    tags=['instance:up-service', 'vespaVersion:7.0.0'])
     assert 3 == check.metric_count
 
 
@@ -72,6 +76,7 @@ def test_check_metrics(aggregator):
     aggregator.assert_service_check(check.VESPA_SERVICE_CHECK, VespaCheck.WARNING, count=0)
 
     aggregator.assert_metric("vespa.container.http.status.2xx.rate",
-                             value=10, tags=['metrictype:standard', 'instance:container', 'scheme:http',
-                                             'httpMethod:GET', 'clustername:default', 'vespaVersion:7.0.0'])
+                             value=10,
+                             tags=['metrictype:standard', 'instance:container', 'scheme:http',
+                                   'httpMethod:GET', 'clustername:default', 'vespaVersion:7.0.0'])
     assert 38 == check.metric_count
