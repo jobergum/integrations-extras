@@ -47,8 +47,9 @@ class VespaCheck(AgentCheck):
         if 'values' not in metrics_elem:
             return
         metric_tags = self._get_tags(metrics_elem)
+        metric_tags.append("vespaService:" + service_name)
         for name, value in metrics_elem['values'].items():
-            full_name = service_name + '.' + name
+            full_name = "vespa." + name
             self._emit_metric(full_name, value, metric_tags + instance_tags)
 
     def _emit_metric(self, name, value, tags):

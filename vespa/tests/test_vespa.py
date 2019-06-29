@@ -75,8 +75,10 @@ def test_check_metrics(aggregator):
     aggregator.assert_service_check(check.VESPA_PROCESS_SERVICE_CHECK, VespaCheck.OK, count=7)
     aggregator.assert_service_check(check.VESPA_PROCESS_SERVICE_CHECK, VespaCheck.WARNING, count=0)
 
-    aggregator.assert_metric("vespa.container.http.status.2xx.rate",
+    aggregator.assert_metric("vespa.http.status.2xx.rate",
                              value=10,
-                             tags=['metrictype:standard', 'instance:container', 'scheme:http',
-                                   'httpMethod:GET', 'clustername:default', 'vespaVersion:7.0.0'])
+                             tags=['metrictype:standard', 'instance:container', 'scheme:http', 'httpMethod:GET',
+                                   'clustername:default', 'vespaVersion:7.0.0', 'vespaService:vespa.container'])
+    aggregator.assert_metric("vespa.http.status.2xx.rate", count=5)
     assert 38 == check.metric_count
+    assert 7 == check.services_up
