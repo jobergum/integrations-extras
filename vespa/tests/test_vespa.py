@@ -19,7 +19,23 @@ def test_cannot_connect_is_critical(aggregator):
     check.URL = 'http://localhost:19333/state/v1/metrics'
     check.check({'consumer': 'default'})
     aggregator.assert_service_check(check.VESPA_METRICS_SERVICE_CHECK,
-                                    VespaCheck.CRITICAL)
+                                    VespaCheck.CRITICAL,
+                                    count=1)
+    aggregator.assert_service_check(check.VESPA_METRICS_SERVICE_CHECK,
+                                    VespaCheck.WARNING,
+                                    count=0)
+
+
+def test_no_services_object_in_json_yields_warning(aggregator):
+    check = VespaCheck("vespa", {}, {})
+    with open(os.path.join(HERE, 'no_services_object.json'), 'r') as f:
+        check._get_metrics_json = MagicMock(return_value=json.load(f))
+    check.check({'consumer': 'default'})
+    aggregator.assert_service_check(check.VESPA_METRICS_SERVICE_CHECK,
+                                    VespaCheck.WARNING,
+                                    count=1,
+                                    message="No services in response from metrics proxy on " +
+                                            check.URL + "?consumer=default")
 
 
 def test_service_reports_down(aggregator):
@@ -80,5 +96,18 @@ def test_check_metrics(aggregator):
                              tags=['metrictype:standard', 'instance:container', 'scheme:http', 'httpMethod:GET',
                                    'clustername:default', 'vespaVersion:7.0.0', 'vespaService:vespa.container'])
     aggregator.assert_metric("vespa.http.status.2xx.rate", count=5)
+    assert_number_of_metrics_and_services(check)
+
+
+def test_check_counters_are_reset_between_check_calls():
+    check = VespaCheck("vespa", {}, {})
+    with open(os.path.join(HERE, 'metrics_all.json'), 'r') as f:
+        check._get_metrics_json = MagicMock(return_value=json.load(f))
+    for _ in 1, 2:
+        check.check({'consumer': 'default'})
+        assert_number_of_metrics_and_services(check)
+
+
+def assert_number_of_metrics_and_services(check):
     assert 38 == check.metric_count
     assert 7 == check.services_up

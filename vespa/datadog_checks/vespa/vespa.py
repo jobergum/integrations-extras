@@ -27,17 +27,32 @@ class VespaCheck(AgentCheck):
         url = self.URL + '?consumer=' + consumer
         try:
             json = self._get_metrics_json(url, 10.0, instance_tags)
+            if 'services' not in json:
+                self.service_check(self.VESPA_METRICS_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
+                                   message="No services in response from metrics proxy on {}".format(url))
+                return
+
             for service in json['services']:
                 service_name = service['name']
                 self._report_service_status(instance_tags, service_name, service)
                 for metrics in service['metrics']:
                     self._emit_metrics(service_name, metrics, instance_tags)
+
             self.log.info("Forwarded {} metrics to hq for {} services".format(self.metric_count, self.services_up))
             self.service_check(self.VESPA_METRICS_SERVICE_CHECK, AgentCheck.OK, tags=instance_tags,
                                message="Metrics collected successfully for consumer {}".format(consumer))
+        except Timeout as e:
+            self.service_check(self.VESPA_METRICS_SERVICE_CHECK, AgentCheck.CRITICAL, tags=instance_tags,
+                               message="Request timeout: {}, {}".format(url, e))
+        except (HTTPError, InvalidURL, ConnectionError) as e:
+            self.service_check(self.VESPA_METRICS_SERVICE_CHECK, AgentCheck.CRITICAL, tags=instance_tags,
+                               message="Request failed: {0}, {1}".format(url, e))
+        except JSONDecodeError as e:
+            self.service_check(self.VESPA_METRICS_SERVICE_CHECK, AgentCheck.CRITICAL, tags=instance_tags,
+                               message='JSON Parse failed: {0}, {1}'.format(url, e))
         except Exception as e:
             self.service_check(self.VESPA_METRICS_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
-                               message="Exception {} ".format(e))
+                               message="Something unexpected happened, exception: {} ".format(e))
 
     def _emit_metrics(self, service_name, metrics_elem, instance_tags):
         """
@@ -61,33 +76,12 @@ class VespaCheck(AgentCheck):
         """ Send rest request to metrics api and return the response as JSON
         """
         self.log.info("Sending request to {}".format(url))
-        try:
-            response = requests.get(url, timeout=timeout)
-            response.raise_for_status()
-            response = response.json()
-            if 'services' not in response:
-                self.service_check(self.VESPA_METRICS_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
-                                   message="No services in response from metrics proxy on {}".format(url))
-                raise
+        response = requests.get(url, timeout=timeout)
+        response.raise_for_status()
+        return response.json()
 
-        except Timeout as e:
-            self.service_check(self.VESPA_METRICS_SERVICE_CHECK, AgentCheck.CRITICAL, tags=instance_tags,
-                               message="Request timeout: {}, {}".format(url, e))
-            raise
-
-        except (HTTPError, InvalidURL, ConnectionError) as e:
-            self.service_check(self.VESPA_METRICS_SERVICE_CHECK, AgentCheck.CRITICAL, tags=instance_tags,
-                               message="Request failed: {0}, {1}".format(url, e))
-            raise
-
-        except JSONDecodeError as e:
-            self.service_check(self.VESPA_METRICS_SERVICE_CHECK, AgentCheck.CRITICAL, tags=instance_tags,
-                               message='JSON Parse failed: {0}, {1}'.format(url, e))
-            raise
-
-        return response
-
-    def _get_tags(self, metrics_elem):
+    @staticmethod
+    def _get_tags(metrics_elem):
         """
         Returns the tags from the dimensions in the given metrics element, or an empty array if there are no dimensions.
         :param metrics_elem: A (values, dimensions) tuple from the 'metrics' json array.
