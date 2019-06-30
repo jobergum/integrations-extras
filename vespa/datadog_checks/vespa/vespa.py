@@ -23,7 +23,7 @@ class VespaCheck(AgentCheck):
         instance_tags = instance.get('tags', [])
         consumer = instance.get('consumer')
         if not consumer:
-            raise CheckException("Configuration error - no consumer defined")
+            raise CheckException("The consumer must be specified in the configuration.")
         url = self.URL + '?consumer=' + consumer
         try:
             json = self._get_metrics_json(url, 10.0, instance_tags)
