@@ -44,23 +44,23 @@ class VespaCheck(AgentCheck):
             self.service_check(self.METRICS_SERVICE_CHECK, AgentCheck.OK, tags=instance_tags,
                                message="Metrics collected successfully for consumer {}".format(consumer))
         except Timeout as e:
-            self._update_service_checks("Timed out connecting to Vespa's node metrics api: {}".format(e),
-                                        AgentCheck.CRITICAL, instance_tags)
+            self._report_metrics_error("Timed out connecting to Vespa's node metrics api: {}".format(e),
+                                       AgentCheck.CRITICAL, instance_tags)
         except (HTTPError, InvalidURL, ConnectionError) as e:
-            self._update_service_checks("Could not connect to Vespa's node metrics api: {}".format(e),
-                                        AgentCheck.CRITICAL, instance_tags)
+            self._report_metrics_error("Could not connect to Vespa's node metrics api: {}".format(e),
+                                       AgentCheck.CRITICAL, instance_tags)
         except JSONDecodeError as e:
-            self._update_service_checks("Error parsing JSON from Vespa's node metrics api: {}".format(e),
-                                        AgentCheck.CRITICAL, instance_tags)
+            self._report_metrics_error("Error parsing JSON from Vespa's node metrics api: {}".format(e),
+                                       AgentCheck.CRITICAL, instance_tags)
         except Exception as e:
-            self._update_service_checks("Unexpected error: {}".format(e),
-                                        AgentCheck.WARNING, instance_tags)
+            self._report_metrics_error("Unexpected error: {}".format(e),
+                                       AgentCheck.WARNING, instance_tags)
 
-    def _update_service_checks(self, msg, level, instance_tags):
+    def _report_metrics_error(self, msg, level, instance_tags):
         self.log.warning(msg)
         self.service_check(self.METRICS_SERVICE_CHECK, level, tags=instance_tags,
                            message=msg)
-        self.service_check(self.PROCESS_SERVICE_CHECK, level, tags=instance_tags,
+        self.service_check(self.PROCESS_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
                            message="Problem getting metrics from Vespa's node metrics api")
         self.log.warning("Issued a warning to " + self.PROCESS_SERVICE_CHECK +
                          " service check, as there is a problem getting metrics from Vespa.")
