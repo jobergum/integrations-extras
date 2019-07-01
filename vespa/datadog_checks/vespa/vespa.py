@@ -110,16 +110,16 @@ class VespaCheck(AgentCheck):
         if 'metrics' in service:
             tags = self._get_tags(service['metrics'][0], service_name)
 
-        instance_tags = tags + instance_tags
+        tags = tags + instance_tags
         if code == "up":
-            self.service_check(self.PROCESS_SERVICE_CHECK, AgentCheck.OK, tags=instance_tags,
+            self.service_check(self.PROCESS_SERVICE_CHECK, AgentCheck.OK, tags=tags,
                                message="Service {} returns up".format(service_name))
             self.services_up += 1
         elif code == "down":
-            self.service_check(self.PROCESS_SERVICE_CHECK, AgentCheck.CRITICAL, tags=instance_tags,
+            self.service_check(self.PROCESS_SERVICE_CHECK, AgentCheck.CRITICAL, tags=tags,
                                message="Service {} reports down: {}".format(service_name, description))
             self.log.warning("Service {} reports down: {}".format(service_name, description))
         else:
-            self.service_check(self.PROCESS_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
+            self.service_check(self.PROCESS_SERVICE_CHECK, AgentCheck.WARNING, tags=tags,
                                message="Service {} reports unknown status: {}".format(service_name, description))
             self.log.warning("Service {} reports unknown status: {}".format(service_name, description))
