@@ -1,21 +1,27 @@
 {
-  "display_name": "Vespa",
-  "maintainer": "bergum@verizonmedia.com",
-  "manifest_version": "1.1.0",
-  "name": "vespa",
-  "metric_prefix": "vespa.",
-  "metric_to_check": "",
+  "integration_id": "vespa",
+  "categories": [
+    "data store"
+  ],
   "creates_events": false,
-  "short_description": "A dd integration to collect Vespa metrics",
-  "guid": "2c1b36c0-9cf7-418e-ac79-3d5bc8f26542",
+  "display_name": "Vespa",
+  "guid": "810e2a6e-4aa4-4b03-b5a4-563f3752f0eb",
+  "is_public": true,
+  "maintainer": "dd@vespa.ai",
+  "manifest_version": "1.0.0",
+  "name": "vespa",
+  "public_title": "Datadog-Vespa Integration",
+  "short_description": "Health and performance monitoring for the big data serving engine Vespa",
   "support": "contrib",
   "supported_os": [
     "linux"
   ],
-  "public_title": "Datadog-Vespa Integration",
-  "categories": [
-    "search"
-  ],
   "type": "check",
-  "is_public": true 
+  "metric_to_check": "vespa.mem.heap.free.average",
+  "metric_prefix": "vespa.",
+  "assets": {
+    "dashboards": {},
+    "monitors": {},
+    "service_checks": "assets/service_checks.json"
+  }
 }
