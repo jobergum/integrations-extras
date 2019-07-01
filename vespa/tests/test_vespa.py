@@ -56,13 +56,13 @@ def test_service_reports_unknown(aggregator):
     check = VespaCheck("vespa", {}, {})
     with open(os.path.join(HERE, 'service_unknown.json'), 'r') as f:
         check._get_metrics_json = MagicMock(return_value=json.load(f))
-    check.check({'consumer': 'default'})
+    check.check({'consumer': 'default', 'tags': ['tag1:val1']})
     aggregator.assert_service_check(check.PROCESS_SERVICE_CHECK,
                                     VespaCheck.WARNING,
                                     count=1,
                                     message='Service vespa.unknown-service reports unknown status: Empty status page',
                                     tags=['instance:unknown-service', 'vespaVersion:7.0.0',
-                                          'vespa-service:vespa.unknown-service'])
+                                          'vespa-service:vespa.unknown-service', 'tag1:val1'])
     aggregator.assert_service_check(check.PROCESS_SERVICE_CHECK, VespaCheck.OK, count=0)
 
 
@@ -70,19 +70,19 @@ def test_down_service_does_not_raise(aggregator):
     check = VespaCheck("vespa", {}, {})
     with open(os.path.join(HERE, 'service_up_and_down.json'), 'r') as f:
         check._get_metrics_json = MagicMock(return_value=json.load(f))
-    check.check({'consumer': 'default'})
+    check.check({'consumer': 'default', 'tags': ['tag1:val1']})
     aggregator.assert_service_check(check.PROCESS_SERVICE_CHECK,
                                     VespaCheck.CRITICAL,
                                     count=1,
                                     message='Service vespa.down-service reports down: No response',
                                     tags=['instance:down-service', 'vespaVersion:7.0.0',
-                                          'vespa-service:vespa.down-service'])
+                                          'vespa-service:vespa.down-service', 'tag1:val1'])
     aggregator.assert_service_check(check.PROCESS_SERVICE_CHECK,
                                     VespaCheck.OK,
                                     count=1,
                                     message='Service vespa.up-service returns up',
                                     tags=['instance:up-service', 'vespaVersion:7.0.0',
-                                          'vespa-service:vespa.up-service'])
+                                          'vespa-service:vespa.up-service', 'tag1:val1'])
     assert 3 == check.metric_count
 
 
