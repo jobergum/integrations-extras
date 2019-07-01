@@ -18,10 +18,10 @@ def test_cannot_connect_is_critical(aggregator):
     check = VespaCheck("vespa", {}, {})
     check.URL = 'http://localhost:19333/state/v1/metrics'
     check.check({'consumer': 'default'})
-    aggregator.assert_service_check(check.VESPA_METRICS_SERVICE_CHECK,
+    aggregator.assert_service_check(check.METRICS_SERVICE_CHECK,
                                     VespaCheck.CRITICAL,
                                     count=1)
-    aggregator.assert_service_check(check.VESPA_METRICS_SERVICE_CHECK,
+    aggregator.assert_service_check(check.METRICS_SERVICE_CHECK,
                                     VespaCheck.WARNING,
                                     count=0)
 
@@ -31,7 +31,7 @@ def test_no_services_object_in_json_yields_metrics_health_warning(aggregator):
     with open(os.path.join(HERE, 'no_services_object.json'), 'r') as f:
         check._get_metrics_json = MagicMock(return_value=json.load(f))
     check.check({'consumer': 'default'})
-    aggregator.assert_service_check(check.VESPA_METRICS_SERVICE_CHECK,
+    aggregator.assert_service_check(check.METRICS_SERVICE_CHECK,
                                     VespaCheck.WARNING,
                                     count=1,
                                     message="No services in response from metrics proxy on " +
@@ -43,13 +43,13 @@ def test_service_reports_down(aggregator):
     with open(os.path.join(HERE, 'service_down.json'), 'r') as f:
         check._get_metrics_json = MagicMock(return_value=json.load(f))
     check.check({'consumer': 'default', 'tags': ['tag1:val1']})
-    aggregator.assert_service_check(check.VESPA_PROCESS_SERVICE_CHECK,
+    aggregator.assert_service_check(check.PROCESS_SERVICE_CHECK,
                                     VespaCheck.CRITICAL,
                                     count=1,
                                     message='Service vespa.down-service reports down: No response',
                                     tags=['instance:down-service', 'vespaVersion:7.0.0',
                                           'vespa-service:vespa.down-service', 'tag1:val1'])
-    aggregator.assert_service_check(check.VESPA_PROCESS_SERVICE_CHECK, VespaCheck.OK, count=0)
+    aggregator.assert_service_check(check.PROCESS_SERVICE_CHECK, VespaCheck.OK, count=0)
 
 
 def test_service_reports_unknown(aggregator):
@@ -57,13 +57,13 @@ def test_service_reports_unknown(aggregator):
     with open(os.path.join(HERE, 'service_unknown.json'), 'r') as f:
         check._get_metrics_json = MagicMock(return_value=json.load(f))
     check.check({'consumer': 'default'})
-    aggregator.assert_service_check(check.VESPA_PROCESS_SERVICE_CHECK,
+    aggregator.assert_service_check(check.PROCESS_SERVICE_CHECK,
                                     VespaCheck.WARNING,
                                     count=1,
                                     message='Service vespa.unknown-service reports unknown status: Empty status page',
                                     tags=['instance:unknown-service', 'vespaVersion:7.0.0',
                                           'vespa-service:vespa.unknown-service'])
-    aggregator.assert_service_check(check.VESPA_PROCESS_SERVICE_CHECK, VespaCheck.OK, count=0)
+    aggregator.assert_service_check(check.PROCESS_SERVICE_CHECK, VespaCheck.OK, count=0)
 
 
 def test_down_service_does_not_raise(aggregator):
@@ -71,13 +71,13 @@ def test_down_service_does_not_raise(aggregator):
     with open(os.path.join(HERE, 'service_up_and_down.json'), 'r') as f:
         check._get_metrics_json = MagicMock(return_value=json.load(f))
     check.check({'consumer': 'default'})
-    aggregator.assert_service_check(check.VESPA_PROCESS_SERVICE_CHECK,
+    aggregator.assert_service_check(check.PROCESS_SERVICE_CHECK,
                                     VespaCheck.CRITICAL,
                                     count=1,
                                     message='Service vespa.down-service reports down: No response',
                                     tags=['instance:down-service', 'vespaVersion:7.0.0',
                                           'vespa-service:vespa.down-service'])
-    aggregator.assert_service_check(check.VESPA_PROCESS_SERVICE_CHECK,
+    aggregator.assert_service_check(check.PROCESS_SERVICE_CHECK,
                                     VespaCheck.OK,
                                     count=1,
                                     message='Service vespa.up-service returns up',
@@ -92,9 +92,9 @@ def test_check_metrics(aggregator):
         check._get_metrics_json = MagicMock(return_value=json.load(f))
 
     check.check({'consumer': 'default', 'tags': ['tag1:val1']})
-    aggregator.assert_service_check(check.VESPA_PROCESS_SERVICE_CHECK, VespaCheck.OK, count=7)
-    aggregator.assert_service_check(check.VESPA_PROCESS_SERVICE_CHECK, VespaCheck.WARNING, count=0)
-    aggregator.assert_service_check(check.VESPA_METRICS_SERVICE_CHECK, VespaCheck.OK, count=1)
+    aggregator.assert_service_check(check.PROCESS_SERVICE_CHECK, VespaCheck.OK, count=7)
+    aggregator.assert_service_check(check.PROCESS_SERVICE_CHECK, VespaCheck.WARNING, count=0)
+    aggregator.assert_service_check(check.METRICS_SERVICE_CHECK, VespaCheck.OK, count=1)
 
     aggregator.assert_metric("vespa.http.status.2xx.rate",
                              value=10,

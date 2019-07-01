@@ -10,8 +10,8 @@ from simplejson import JSONDecodeError
 class VespaCheck(AgentCheck):
     logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
-    VESPA_METRICS_SERVICE_CHECK = 'vespa.metrics_health'
-    VESPA_PROCESS_SERVICE_CHECK = 'vespa.process_health'
+    METRICS_SERVICE_CHECK = 'vespa.metrics_health'
+    PROCESS_SERVICE_CHECK = 'vespa.process_health'
     VESPA_SERVICE_DIM = 'vespa-service:'
     URL = 'http://localhost:19092/metrics/v1/values'
 
@@ -30,7 +30,7 @@ class VespaCheck(AgentCheck):
         try:
             json = self._get_metrics_json(url, 10.0)
             if 'services' not in json:
-                self.service_check(self.VESPA_METRICS_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
+                self.service_check(self.METRICS_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
                                    message="No services in response from metrics proxy on {}".format(url))
                 return
 
@@ -41,7 +41,7 @@ class VespaCheck(AgentCheck):
                     self._emit_metrics(service_name, metrics, instance_tags)
 
             self.log.info("Forwarded {} metrics to hq for {} services".format(self.metric_count, self.services_up))
-            self.service_check(self.VESPA_METRICS_SERVICE_CHECK, AgentCheck.OK, tags=instance_tags,
+            self.service_check(self.METRICS_SERVICE_CHECK, AgentCheck.OK, tags=instance_tags,
                                message="Metrics collected successfully for consumer {}".format(consumer))
         except Timeout as e:
             self._update_service_checks("Timed out connecting to Vespa's node metrics api: {}".format(e),
@@ -58,11 +58,11 @@ class VespaCheck(AgentCheck):
 
     def _update_service_checks(self, msg, level, instance_tags):
         self.log.warning(msg)
-        self.service_check(self.VESPA_METRICS_SERVICE_CHECK, level, tags=instance_tags,
+        self.service_check(self.METRICS_SERVICE_CHECK, level, tags=instance_tags,
                            message=msg)
-        self.service_check(self.VESPA_PROCESS_SERVICE_CHECK, level, tags=instance_tags,
+        self.service_check(self.PROCESS_SERVICE_CHECK, level, tags=instance_tags,
                            message="Problem getting metrics from Vespa's node metrics api")
-        self.log.warning("Issued a warning to " + self.VESPA_PROCESS_SERVICE_CHECK +
+        self.log.warning("Issued a warning to " + self.PROCESS_SERVICE_CHECK +
                          " service check, as there is a problem getting metrics from Vespa.")
 
     def _emit_metrics(self, service_name, metrics_elem, instance_tags):
@@ -112,14 +112,14 @@ class VespaCheck(AgentCheck):
 
         instance_tags = tags + instance_tags
         if code == "up":
-            self.service_check(self.VESPA_PROCESS_SERVICE_CHECK, AgentCheck.OK, tags=instance_tags,
+            self.service_check(self.PROCESS_SERVICE_CHECK, AgentCheck.OK, tags=instance_tags,
                                message="Service {} returns up".format(service_name))
             self.services_up += 1
         elif code == "down":
-            self.service_check(self.VESPA_PROCESS_SERVICE_CHECK, AgentCheck.CRITICAL, tags=instance_tags,
+            self.service_check(self.PROCESS_SERVICE_CHECK, AgentCheck.CRITICAL, tags=instance_tags,
                                message="Service {} reports down: {}".format(service_name, description))
             self.log.warning("Service {} reports down: {}".format(service_name, description))
         else:
-            self.service_check(self.VESPA_PROCESS_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
+            self.service_check(self.PROCESS_SERVICE_CHECK, AgentCheck.WARNING, tags=instance_tags,
                                message="Service {} reports unknown status: {}".format(service_name, description))
             self.log.warning("Service {} reports unknown status: {}".format(service_name, description))
