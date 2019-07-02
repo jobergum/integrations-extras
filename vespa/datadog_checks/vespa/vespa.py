@@ -12,7 +12,7 @@ class VespaCheck(AgentCheck):
 
     METRICS_SERVICE_CHECK = 'vespa.metrics_health'
     PROCESS_SERVICE_CHECK = 'vespa.process_health'
-    VESPA_SERVICE_DIM = 'vespa-service:'
+    VESPA_SERVICE_TAG = 'vespa-service:'
     URL = 'http://localhost:19092/metrics/v1/values'
 
     metric_count = 0
@@ -100,7 +100,7 @@ class VespaCheck(AgentCheck):
             dimensions = metrics_elem['dimensions']
             for dim, dim_val in dimensions.items():
                 tags.append(dim + ":" + dim_val)
-        tags.append(self.VESPA_SERVICE_DIM + service_name)
+        tags.append(self.VESPA_SERVICE_TAG + service_name)
         return tags
 
     def _report_service_status(self, instance_tags, service_name, service):
