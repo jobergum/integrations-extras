@@ -2,8 +2,6 @@
 
 ## Overview
 
-NOTE: This check is currently in _beta_.
-
 Gather metrics from your [Vespa][1] system in real time to:
 
 * Visualize and monitor Vespa state and performance
